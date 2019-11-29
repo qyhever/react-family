@@ -11,7 +11,7 @@ const serveStatic = require('serve-static')
 const spinner = ora(`building for ${process.env.MODE}...`)
 spinner.start()
 
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
+rm(config.build.assetsRoot, err => {
   if (err) throw err
   webpack(webpackConfig, (err, stats) => {
     spinner.stop()

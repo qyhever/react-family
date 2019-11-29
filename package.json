@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --progress --color --config ./build/webpack.dev.config.js",
+    "dev": "cross-env MODE=dev webpack-dev-server --progress --color --config ./build/webpack.dev.config.js",
     "build": "npm run prod",
     "test": "cross-env MODE=test node build/build.js",
     "prod": "cross-env MODE=prod node build/build.js",
@@ -24,6 +24,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "@babel/preset-react": "^7.0.0",
+    "address": "^1.1.2",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-import": "^1.11.0",

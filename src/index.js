@@ -12,6 +12,13 @@ import NavCom from './components/NavCom'
 import RouterConfig from './router'
 import './index.less'
 
+const baseURL = {
+	dev: 'http://localhost:3000',
+	test: 'http://test.ever.com',
+	prod: 'http://ever.com'
+}[process.env.MODE]
+console.log(baseURL)
+
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
     <Provider store={store}>

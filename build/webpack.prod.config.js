@@ -36,10 +36,10 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
 
   output: {
-    path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[hash].js',
-    chunkFilename: '[name].[chunkhash].js',
-    publicPath: '/'
+    path: config.build.assetsRoot,
+    filename: utils.assetsPath('js/[name].[hash:8].js'),
+    chunkFilename: utils.assetsPath('js/[name].[chunkhash:8].js'),
+    publicPath: config.build.assetsPublicPath
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   module: {
@@ -84,7 +84,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': require(`../config/${process.env.MODE}.env`)
+      'process.env': require('../config/prod.env')
     }),
     new webpack.ProgressPlugin(),
     new HtmlWebpackPlugin({

@@ -1,4 +1,5 @@
 const path = require('path')
+const url = require('url')
 const utils = require('./utils')
 const config = require('../config')
 const webpack = require('webpack')
@@ -7,6 +8,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const baseWebpackConfig = require('./webpack.base.config')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
+const { spawn } = require('child_process')
+const address = require('address')
+const chalk = require('chalk')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
@@ -118,10 +122,28 @@ module.exports = new Promise((resolve, reject) => {
       // add port to devServer config
       devWebpackConfig.devServer.port = port
 
+      const localUrl = `http://${devWebpackConfig.devServer.host}:${port}`
+
+      const networkUrl = url.format({
+        protocol: 'http',
+        hostname: address.ip(),
+        port: chalk.bold(port),
+        pathname: '/',
+      })
+
+      // copy to clipboard, only effective in windows platform
+      spawn('clip').stdin.end(localUrl)
+
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [
+            [
+              'Your application running at:',
+              `    ${chalk.bold('Local:')}            ${localUrl} (copied to clipboard)`,
+              `    ${chalk.bold('On Your Network:')}  ${networkUrl}`
+            ].join('\n')
+          ]
         },
         onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()

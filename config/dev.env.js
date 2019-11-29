@@ -1,4 +1,4 @@
 module.exports = {
 	NODE_ENV: '"development"',
-  MODE: '"dev"'
+  MODE: JSON.stringify(process.env.MODE)
 }
