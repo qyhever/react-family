@@ -12,7 +12,8 @@ module.exports = {
 		notifyOnErrors: true,
 		useEslint: true,
     // https://www.webpackjs.com/configuration/devtool/
-		devtool: 'cheap-module-eval-source-map'
+		devtool: 'cheap-module-eval-source-map',
+    showEslintErrorsInOverlay: false
 	},
 	build: {
 		index: path.resolve(__dirname, '../public/index.html'),

@@ -17,7 +17,8 @@ const createLintingRule = () => ({
   enforce: 'pre', // 保证在 babel-loader 之前处理
   include: [resolve('src')],
   options: {
-     formatter: require('eslint-friendly-formatter')
+     formatter: require('eslint-friendly-formatter'),
+     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
 

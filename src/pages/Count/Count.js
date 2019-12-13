@@ -3,6 +3,13 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { increment, decrement, reset } from '@/actions/count'
 import { Button } from 'antd'
+function p() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(1)
+    }, 1000)
+  })
+}
 
 @connect(
   state => state,
@@ -10,14 +17,11 @@ import { Button } from 'antd'
 )
 class Count extends PureComponent {
   componentDidMount() {
-    const a = { name: 'zs' }
-    const b = 2
-    const c = {
-      a
-    }
-    if (a === b) {
-      console.log(a, b, c)
-    }
+    this.query()
+  }
+  async query() {
+    const res = await p()
+    console.log(res)
   }
   render() {
     return (
